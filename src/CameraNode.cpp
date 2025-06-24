@@ -1,4 +1,4 @@
-#include "ParameterHandler.hpp"
+	#include "ParameterHandler.hpp"
 #include "format_mapping.hpp"
 #include "libcamera_version_utils.hpp"
 #include "pretty_print.hpp"
@@ -634,7 +634,7 @@ CameraNode::process(libcamera::Request *const request)
         msg_img->width = cfg.size.width;
         msg_img->height = cfg.size.height;
         msg_img->step = cfg.stride;
-        msg_img->encoding = get_ros_encoding(cfg.pixelFormat);
+        msg_img->encoding = "rgba8";//get_ros_encoding(cfg.pixelFormat);
         msg_img->is_bigendian = (__BYTE_ORDER__ == __ORDER_BIG_ENDIAN__);
         msg_img->data.resize(buffer_info[buffer].size);
         memcpy(msg_img->data.data(), buffer_info[buffer].data, buffer_info[buffer].size);

@@ -42,6 +42,18 @@ def generate_launch_description() -> LaunchDescription:
         description="pixel format"
     )
 
+    image_rate_name = "image_rate"
+    image_rate_param_default = "[200000,200000]"
+    image_rate_param = LaunchConfiguration(
+        image_rate_name,
+        default=image_rate_param_default,
+    )
+    camera_launch_arg = DeclareLaunchArgument(
+        image_rate_name,
+        default_value=image_rate_param_default,
+        description="Image publish rate"
+    )
+
     # camera node
     composable_nodes = [
         ComposableNode(
@@ -52,6 +64,7 @@ def generate_launch_description() -> LaunchDescription:
                 "width": 640,
                 "height": 480,
                 "format": format_param,
+                'FrameDurationLimits': image_rate_param
             }],
             extra_arguments=[{'use_intra_process_comms': True}],
         ),
